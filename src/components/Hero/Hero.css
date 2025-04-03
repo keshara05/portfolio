@@ -1,123 +1,286 @@
-.hero {
+:root {
+    --primary-color: #6c63ff;
+    --primary-light: #8a85ff;
+    --secondary-color: #ff6b6b;
+    --accent-color: #4dccc6;
+    --dark-color: #1a1a2e;
+    --light-color: #f8f9fa;
+    --text-dark: #2a2a2a;
+    --text-light: #ffffff;
+  }
+  
+  .hero {
     min-height: 100vh;
     display: flex;
     align-items: center;
     padding-top: 80px;
-    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+    background: linear-gradient(
+      135deg, 
+      rgba(245, 247, 250, 0.95) 0%, 
+      rgba(228, 232, 240, 0.95) 100%
+    );
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(
+      circle, 
+      rgba(108, 99, 255, 0.1) 0%, 
+      transparent 70%
+    );
+    border-radius: 50%;
+    z-index: 0;
   }
   
   .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 2rem;
+    gap: 3rem;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 1;
   }
   
   .hero-content {
     flex: 1;
+    max-width: 600px;
   }
   
   .hero-subtitle {
-    font-size: 1.25rem;
-    color: var(--gray-color);
-    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    color: var(--primary-color);
+    margin-bottom: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 1px;
   }
   
   .hero-title {
-    font-size: 3.5rem;
+    font-size: 4rem;
     margin-bottom: 1.5rem;
-    line-height: 1.2;
+    line-height: 1.1;
+    color: var(--dark-color);
+    font-weight: 700;
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
   }
   
   .hero-description {
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
-    color: var(--gray-color);
+    font-size: 1.3rem;
+    margin-bottom: 2.5rem;
+    color: var(--text-dark);
     font-weight: 400;
+    line-height: 1.7;
   }
   
   .highlight {
-    color: var(--primary-color);
+    position: relative;
     font-weight: 600;
+  }
+  
+  .highlight::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: rgba(108, 99, 255, 0.3);
+    z-index: -1;
+    transition: all 0.3s ease;
+    border-radius: 3px;
+  }
+  
+  .highlight:hover::after {
+    height: 12px;
+    background: rgba(108, 99, 255, 0.4);
   }
   
   .hero-buttons {
     display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
+    gap: 1.2rem;
+    margin-top: 2.5rem;
   }
   
   .btn {
-    padding: 0.75rem 1.5rem;
+    padding: 0.9rem 2rem;
     border-radius: 50px;
-    font-weight: 500;
-    transition: all 0.3s ease;
+    font-weight: 600;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     display: inline-block;
+    font-size: 1rem;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
   }
   
   .btn-primary {
-    background-color: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
     color: white;
-    border: 2px solid var(--primary-color);
+    border: none;
+    box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
   }
   
   .btn-primary:hover {
-    background-color: var(--secondary-color);
-    border-color: var(--secondary-color);
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(108, 99, 255, 0.2);
+    box-shadow: 0 8px 25px rgba(108, 99, 255, 0.4);
   }
   
   .btn-outline {
     border: 2px solid var(--primary-color);
     color: var(--primary-color);
+    background: transparent;
   }
   
   .btn-outline:hover {
-    background-color: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
     color: white;
+    border-color: transparent;
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(108, 99, 255, 0.2);
+    box-shadow: 0 8px 25px rgba(108, 99, 255, 0.2);
   }
   
   .hero-image {
     flex: 1;
     display: flex;
     justify-content: center;
+    position: relative;
+  }
+  
+  .image-container {
+    position: relative;
+    width: 400px;
+    height: 400px;
   }
   
   .image-placeholder {
-    width: 400px;
-    height: 400px;
+    width: 100%;
+    height: 100%;
     border-radius: 20px;
-    background-color: #ddd;
+    background: linear-gradient(
+      45deg, 
+      var(--primary-color), 
+      var(--primary-light),
+      var(--accent-color)
+    );
+    background-size: 200% 200%;
     position: relative;
     overflow: hidden;
+    z-index: 2;
+    box-shadow: 0 20px 40px rgba(108, 99, 255, 0.25);
+    animation: gradientShift 8s ease infinite;
   }
   
-  /* Add your image styling here */
+  .image-glow {
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    background: linear-gradient(
+      45deg, 
+      var(--primary-color), 
+      var(--accent-color)
+    );
+    filter: blur(20px);
+    opacity: 0.4;
+    z-index: 1;
+    border-radius: 30px;
+  }
+  
+  @keyframes gradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 1200px) {
+    .hero-title {
+      font-size: 3.5rem;
+    }
+    
+    .hero-description {
+      font-size: 1.2rem;
+    }
+    
+    .image-container {
+      width: 350px;
+      height: 350px;
+    }
+  }
   
   @media (max-width: 992px) {
     .container {
       flex-direction: column;
       text-align: center;
+      gap: 2rem;
     }
-  
+    
+    .hero-content {
+      max-width: 100%;
+    }
+    
     .hero-buttons {
       justify-content: center;
     }
-  
+    
     .hero-title {
-      font-size: 2.5rem;
+      font-size: 3rem;
     }
-  
+    
     .hero-description {
-      font-size: 1rem;
+      font-size: 1.1rem;
     }
-  
-    .image-placeholder {
+    
+    .image-container {
       width: 300px;
       height: 300px;
       margin-top: 2rem;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .hero-title {
+      font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.1rem;
+    }
+    
+    .hero-buttons {
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .btn {
+      width: 100%;
+      max-width: 220px;
+    }
+    
+    .image-container {
+      width: 250px;
+      height: 250px;
     }
   }

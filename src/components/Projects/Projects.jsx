@@ -3,22 +3,27 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import './Projects.css';
 
+//Import your project images
+//import Crichub from './assets/images/Crichub.png';
+//import KMaths from './assets/images/K-Maths.png';
+//import Hero from './assets/images/hero-image.jpg';
+
 const projectsData = [
   {
     id: 1,
-    title: 'E-commerce Platform',
-    description: 'A full-featured e-commerce platform with product listings, cart functionality, and payment integration.',
-    tags: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-    image: '',
+    title: 'CricHub',
+    description: 'A cricket statistics platform with live scores, player profiles, and match analysis.',
+    tags: ['React', 'Node.js', 'MongoDB', 'API'],
+    //image: Crichub,
     github: '#',
     live: '#'
   },
   {
     id: 2,
-    title: 'Task Management App',
-    description: 'A productivity application for managing tasks with drag-and-drop functionality and team collaboration.',
+    title: 'K-Maths',
+    description: 'An interactive math learning app with problem-solving exercises and progress tracking.',
     tags: ['React', 'Firebase', 'Material UI'],
-    image: '',
+    //image: KMaths,
     github: '#',
     live: '#'
   },
@@ -27,7 +32,7 @@ const projectsData = [
     title: 'Weather Dashboard',
     description: 'Real-time weather information with forecasts and interactive maps using weather API.',
     tags: ['JavaScript', 'API Integration', 'CSS3'],
-    image: '',
+    //image: Hero,
     github: '#',
     live: '#'
   }
@@ -58,12 +63,13 @@ const Projects = () => {
   };
 
   const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
+    hidden: { y: 30, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.6
+        duration: 0.6,
+        ease: "easeOut"
       }
     }
   };
@@ -80,45 +86,80 @@ const Projects = () => {
             My Projects
           </motion.h2>
 
-          <motion.div className="project-filters" variants={itemVariants}>
+          <motion.div 
+            className="project-filters" 
+            variants={itemVariants}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+          >
             {filters.map((filter, index) => (
-              <button
+              <motion.button
                 key={index}
                 className={`filter-btn ${activeFilter === filter ? 'active' : ''}`}
                 onClick={() => setActiveFilter(filter)}
+                whileHover={{ scale: 1.05, backgroundColor: '#6c63ff', color: 'white' }}
+                whileTap={{ scale: 0.95 }}
+                variants={itemVariants}
               >
                 {filter}
-              </button>
+              </motion.button>
             ))}
           </motion.div>
 
-          <motion.div className="projects-grid" variants={containerVariants}>
+          <motion.div 
+            className="projects-grid" 
+            variants={containerVariants}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+          >
             {filteredProjects.map((project) => (
               <motion.div 
                 key={project.id}
                 className="project-card"
                 variants={itemVariants}
-                whileHover={{ y: -10 }}
-                transition={{ duration: 0.3 }}
+                whileHover={{ y: -10, scale: 1.02 }}
+                transition={{ duration: 0.3, ease: "easeOut" }}
               >
                 <div className="project-image">
-                  <div className="image-placeholder"></div>
+                  <img 
+                    src={project.image} 
+                    alt={project.title} 
+                    className="project-img"
+                    loading="lazy"
+                  />
+                  <div className="image-overlay">
+                    <div className="overlay-content">
+                      <h3>{project.title}</h3>
+                      <div className="overlay-tags">
+                        {project.tags.map((tag, index) => (
+                          <span key={index}>{tag}</span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div className="project-content">
                   <h3>{project.title}</h3>
                   <p>{project.description}</p>
-                  <div className="project-tags">
-                    {project.tags.map((tag, index) => (
-                      <span key={index}>{tag}</span>
-                    ))}
-                  </div>
                   <div className="project-links">
-                    <a href={project.github} target="_blank" rel="noopener noreferrer">
+                    <motion.a 
+                      href={project.github} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      whileHover={{ x: 5 }}
+                      className="github-link"
+                    >
                       GitHub
-                    </a>
-                    <a href={project.live} target="_blank" rel="noopener noreferrer">
+                    </motion.a>
+                    <motion.a 
+                      href={project.live} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      whileHover={{ x: 5 }}
+                      className="live-link"
+                    >
                       Live Demo
-                    </a>
+                    </motion.a>
                   </div>
                 </div>
               </motion.div>

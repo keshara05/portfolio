@@ -40,14 +40,16 @@ const Header = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
+            className="logo-text"
           >
-            YourName
+            Keshara
           </motion.span>
         </a>
 
         <button 
           className={`hamburger ${mobileMenuOpen ? 'open' : ''}`}
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Menu"
         >
           <span></span>
           <span></span>
@@ -61,13 +63,18 @@ const Header = () => {
                 key={index}
                 initial={{ y: -20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.2 + index * 0.1 }}
+                transition={{ 
+                  delay: 0.2 + index * 0.1,
+                  type: "spring",
+                  stiffness: 300
+                }}
               >
                 <a 
                   href={link.href} 
                   onClick={() => setMobileMenuOpen(false)}
+                  className="nav-link"
                 >
-                  {link.name}
+                  <span className="nav-link-content">{link.name}</span>
                 </a>
               </motion.li>
             ))}
